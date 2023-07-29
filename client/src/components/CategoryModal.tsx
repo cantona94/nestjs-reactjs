@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Form } from 'react-router-dom';
 
 interface IProps {
-  id: number;
+  id?: number;
   type: 'post' | 'patch';
   setVisibleModal: (visible: boolean) => void;
 }
@@ -13,7 +13,12 @@ const CategoryModal: FC<IProps> = ({ id, type, setVisibleModal }) => {
       className="fixed top-0 left-0 bottom-0 right-0 w-full h-full 
     bg-black/50 flex justify-center items-center"
     >
-      <Form className="grid w-[300px] gap-2 rounded-md bg-slate-900 p-5">
+      <Form
+        action="/categories"
+        method={type}
+        onSubmit={() => setVisibleModal(false)}
+        className="grid w-[300px] gap-2 rounded-md bg-slate-900 p-5"
+      >
         <label htmlFor="title">
           <small>Category Title</small>
           <input
@@ -22,12 +27,18 @@ const CategoryModal: FC<IProps> = ({ id, type, setVisibleModal }) => {
             name="title"
             placeholder="Title..."
           />
+          <input type="hidden" name="id" value={id} />
         </label>
         <div className="flex items-center gap-2">
           <button className="btn btn-green" type="submit">
             {type === 'patch' ? 'Save' : 'Create'}
           </button>
-          <button className="btn btn-red">Close</button>
+          <button
+            onClick={() => setVisibleModal(false)}
+            className="btn btn-red"
+          >
+            Close
+          </button>
         </div>
       </Form>
     </div>
