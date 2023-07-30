@@ -1,10 +1,13 @@
 import { FC } from 'react';
+import TransactionForm from '../components/TransactionForm';
 
 const Transactions: FC = () => {
   return (
     <>
       <div className="grid grid-cols-3 gap-4 mt-4 items-start">
-        <div className="grid col-span-2 ">Add Transactions Form</div>
+        <div className="grid col-span-2 ">
+          <TransactionForm />
+        </div>
         <div className="rounded-md bg-slate-800 p-3">
           <div className="grid grid-cols-2 gap-3">
             <div>
