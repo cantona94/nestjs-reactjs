@@ -28,10 +28,10 @@ const TransactionForm: FC = () => {
         </label>
         <label htmlFor="category" className="grid">
           <span>Category</span>
-          <select className="input" name="category">
-            <option value="1">Salary</option>
-            <option value="2">Salary</option>
-            <option value="3">Salary</option>
+          <select className="input" name="category" required>
+            <option value="1">Salary 1</option>
+            <option value="2">Salary 2</option>
+            <option value="3">Salary 3</option>
           </select>
         </label>
         <button
