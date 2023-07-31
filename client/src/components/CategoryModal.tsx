@@ -26,6 +26,7 @@ const CategoryModal: FC<IProps> = ({ id, type, setVisibleModal }) => {
             type="text"
             name="title"
             placeholder="Title..."
+            autoFocus={true}
           />
           <input type="hidden" name="id" value={id} />
         </label>

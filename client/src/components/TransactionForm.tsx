@@ -1,9 +1,11 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { Form, useLoaderData } from 'react-router-dom';
 import { IResponseTransactionLoader } from '../types/types';
+import CategoryModal from './CategoryModal';
 
 const TransactionForm: FC = () => {
+  const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const { categories } = useLoaderData() as IResponseTransactionLoader;
   return (
     <div className="rounded-md bg-slate-800 p-4">
@@ -45,7 +47,7 @@ const TransactionForm: FC = () => {
           </h1>
         )}
         <button
-          //onClick={() => setVisibleModal(true)}
+          onClick={() => setVisibleModal(true)}
           className="flex max-w-fit items-center gap-2
       text-white/50 hover:text-white"
         >
@@ -74,6 +76,9 @@ const TransactionForm: FC = () => {
         </div>
         <button className="btn btn-green max-w-fit mt-2">Submit</button>
       </Form>
+      {visibleModal && (
+        <CategoryModal type="post" setVisibleModal={setVisibleModal} />
+      )}
     </div>
   );
 };
