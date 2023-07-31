@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import { Form } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
+import { IResponseTransactionLoader } from '../types/types';
 
 const TransactionForm: FC = () => {
+  const { categories } = useLoaderData() as IResponseTransactionLoader;
   return (
     <div className="rounded-md bg-slate-800 p-4">
       <Form method="post" action="/transactions" className="grid gap-2">
@@ -26,17 +28,25 @@ const TransactionForm: FC = () => {
             required
           />
         </label>
-        <label htmlFor="category" className="grid">
-          <span>Category</span>
-          <select className="input" name="category" required>
-            <option value="1">Salary 1</option>
-            <option value="2">Salary 2</option>
-            <option value="3">Salary 3</option>
-          </select>
-        </label>
+        {categories.length ? (
+          <label htmlFor="category" className="grid">
+            <span>Category</span>
+            <select className="input" name="category" required>
+              {categories.map((ctg) => (
+                <option key={ctg.id} value={ctg.id}>
+                  {ctg.title}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : (
+          <h1 className="mt-1 text-red-300">
+            To coutinue create a category first
+          </h1>
+        )}
         <button
           //onClick={() => setVisibleModal(true)}
-          className="mt-2 flex max-w-fit items-center gap-2
+          className="flex max-w-fit items-center gap-2
       text-white/50 hover:text-white"
         >
           <FaPlus />
