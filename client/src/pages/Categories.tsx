@@ -43,6 +43,7 @@ const Categories: FC = () => {
   const [visibleModal, setVisibleModal] = useState<boolean>(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [categoryId, setCategoryId] = useState<number>(0);
+  const [categoryTitle, setCategoryTitle] = useState<string>('');
   const categories = useLoaderData() as ICategory[];
   return (
     <>
@@ -63,6 +64,7 @@ const Categories: FC = () => {
                 <button
                   onClick={() => {
                     setCategoryId(category.id);
+                    setCategoryTitle(category.title);
                     setVisibleModal(true);
                     setIsEdit(true);
                   }}
@@ -96,6 +98,9 @@ const Categories: FC = () => {
         <CategoryModal
           type="patch"
           id={categoryId}
+          title={categoryTitle}
+          setCategoryTitle={setCategoryTitle}
+          setIsEdit={setIsEdit}
           setVisibleModal={setVisibleModal}
         />
       )}
