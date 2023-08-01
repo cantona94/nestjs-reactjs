@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { FaTrash } from 'react-icons/fa';
-import { useLoaderData } from 'react-router-dom';
+import { Form, useLoaderData } from 'react-router-dom';
 import { IResponseTransactionLoader } from '../types/types';
 import { formatDate } from '../helpers/date.helper';
 import { formatToUSD } from '../helpers/currency.helper';
@@ -40,9 +40,12 @@ const TransactionTable: FC = () => {
                 <td>{transaction.category?.title || 'Other'}</td>
                 <td>{formatDate(transaction.createdAt)}</td>
                 <td className="text-right">
-                  <button className="btn hover:btn-red ml-auto">
-                    <FaTrash />
-                  </button>
+                  <Form method="delete" action="/transactions">
+                    <input type="hidden" name="id" value={transaction.id} />
+                    <button className="btn hover:btn-red ml-auto">
+                      <FaTrash />
+                    </button>
+                  </Form>
                 </td>
               </tr>
             ))}
