@@ -55,10 +55,7 @@ const CategoryModal: FC<IProps> = ({
           <button className="btn btn-green" type="submit">
             {type === 'patch' ? 'Save' : 'Create'}
           </button>
-          <button
-            onClick={() => setVisibleModal(false)}
-            className="btn btn-red"
-          >
+          <button onClick={handleCloseModal} className="btn btn-red">
             Close
           </button>
         </div>
