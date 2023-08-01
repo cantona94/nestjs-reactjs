@@ -1,5 +1,5 @@
-import { Category } from "src/category/entities/category.entity";
-import { User } from "src/user/entities/user.entity";
+import { Category } from 'src/category/entities/category.entity'
+import { User } from 'src/user/entities/user.entity'
 import {
   Column,
   CreateDateColumn,
@@ -8,7 +8,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from "typeorm";
+} from 'typeorm'
 
 @Entity()
 export class Transaction {
@@ -25,7 +25,9 @@ export class Transaction {
   @JoinColumn({ name: 'user_id' })
   user: User
 
-  @ManyToOne(() => Category, (category) => category.transactions)
+  @ManyToOne(() => Category, (category) => category.transactions, {
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'category_id' })
   category: Category
 

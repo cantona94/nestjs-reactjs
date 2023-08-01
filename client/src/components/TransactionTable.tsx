@@ -3,6 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
 import { IResponseTransactionLoader } from '../types/types';
 import { formatDate } from '../helpers/date.helper';
+import { formatToUSD } from '../helpers/currency.helper';
 
 const TransactionTable: FC = () => {
   const { transactions } = useLoaderData() as IResponseTransactionLoader;
@@ -21,13 +22,23 @@ const TransactionTable: FC = () => {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transactions, ind) => (
-              <tr key={transactions.id}>
+            {transactions.map((transaction, ind) => (
+              <tr key={transaction.id}>
                 <td>{ind + 1}</td>
-                <td>{transactions.title}</td>
-                <td>{transactions.amount}</td>
-                <td>{transactions.category.title}</td>
-                <td>{formatDate(transactions.createdAt)}</td>
+                <td>{transaction.title}</td>
+                <td
+                  className={
+                    transaction.type === 'income'
+                      ? 'text-green-500'
+                      : 'text-red-500'
+                  }
+                >
+                  {transaction.type === 'income'
+                    ? `+ ${formatToUSD.format(transaction.amount)}`
+                    : `- ${formatToUSD.format(transaction.amount)}`}
+                </td>
+                <td>{transaction.category?.title || 'Other'}</td>
+                <td>{formatDate(transaction.createdAt)}</td>
                 <td className="text-right">
                   <button className="btn hover:btn-red ml-auto">
                     <FaTrash />
