@@ -1,7 +1,11 @@
 import { FC } from 'react';
 import { FaTrash } from 'react-icons/fa';
+import { useLoaderData } from 'react-router-dom';
+import { IResponseTransactionLoader } from '../types/types';
 
 const TransactionTable: FC = () => {
+  const { transactions } = useLoaderData() as IResponseTransactionLoader;
+  console.log(transactions);
   return (
     <>
       <div className="bg-slate-800 px-4 py-3 mt-4 rounded-md">
@@ -17,18 +21,20 @@ const TransactionTable: FC = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Avgust</td>
-              <td>300</td>
-              <td>Salary</td>
-              <td>Data</td>
-              <td className="text-right">
-                <button className="btn hover:btn-red ml-auto">
-                  <FaTrash />
-                </button>
-              </td>
-            </tr>
+            {transactions.map((transactions, ind) => (
+              <tr key={transactions.id}>
+                <td>{ind + 1}</td>
+                <td>{transactions.title}</td>
+                <td>{transactions.amount}</td>
+                <td>{transactions.category.title}</td>
+                <td>{transactions.createAt}</td>
+                <td className="text-right">
+                  <button className="btn hover:btn-red ml-auto">
+                    <FaTrash />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

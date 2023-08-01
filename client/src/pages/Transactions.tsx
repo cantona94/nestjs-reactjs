@@ -7,8 +7,10 @@ import TransactionTable from '../components/TransactionTable';
 
 export const transactionLoader = async () => {
   const categories = await instance.get<ICategory[]>('/categories');
+  const transactions = await instance.get('/transactions');
   const data = {
     categories: categories.data,
+    transactions: transactions.data,
   };
   return data;
 };
