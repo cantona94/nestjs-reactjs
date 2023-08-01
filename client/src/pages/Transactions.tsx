@@ -3,6 +3,7 @@ import TransactionForm from '../components/TransactionForm';
 import { instance } from '../api/axios.api';
 import { ICategory } from '../types/types';
 import { toast } from 'react-toastify';
+import TransactionTable from '../components/TransactionTable';
 
 export const transactionLoader = async () => {
   const categories = await instance.get<ICategory[]>('/categories');
@@ -61,7 +62,9 @@ const Transactions: FC = () => {
           <>Chart</>
         </div>
       </div>
-      <h1 className="my-5">Table</h1>
+      <h1 className="my-5">
+        <TransactionTable />
+      </h1>
     </>
   );
 };
