@@ -27,8 +27,8 @@ export interface ITransaction {
   title: string;
   amount: number;
   type: string;
-  createAt: string;
-  updateAt: string;
+  createdAt: string;
+  updatedAt: string;
   category: ICategory;
 }
 

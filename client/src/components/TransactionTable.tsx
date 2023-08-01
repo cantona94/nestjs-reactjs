@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { useLoaderData } from 'react-router-dom';
 import { IResponseTransactionLoader } from '../types/types';
+import { formatDate } from '../helpers/date.helper';
 
 const TransactionTable: FC = () => {
   const { transactions } = useLoaderData() as IResponseTransactionLoader;
-  console.log(transactions);
   return (
     <>
       <div className="bg-slate-800 px-4 py-3 mt-4 rounded-md">
@@ -27,7 +27,7 @@ const TransactionTable: FC = () => {
                 <td>{transactions.title}</td>
                 <td>{transactions.amount}</td>
                 <td>{transactions.category.title}</td>
-                <td>{transactions.createAt}</td>
+                <td>{formatDate(transactions.createdAt)}</td>
                 <td className="text-right">
                   <button className="btn hover:btn-red ml-auto">
                     <FaTrash />
