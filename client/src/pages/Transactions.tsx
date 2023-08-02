@@ -61,33 +61,45 @@ const Transactions: FC = () => {
         <div className="grid col-span-2 ">
           <TransactionForm />
         </div>
-        <div className="rounded-md bg-slate-800 p-3">
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <p className="text-sm text-center font-bold uppercase">
-                Total Income:
-              </p>
-              <p className="bg-green-600 p-1 rounded-sm text-center mt-2">
-                {formatToUSD.format(totalIncome)}
-              </p>
+        {totalIncome || totalExpense ? (
+          <div className="rounded-md bg-slate-800 p-3">
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <p className="text-sm text-center font-bold uppercase">
+                  Total Income:
+                </p>
+                <p className="bg-green-600 p-1 rounded-sm text-center mt-2">
+                  {formatToUSD.format(totalIncome)}
+                </p>
+              </div>
+              <div>
+                <p className="text-sm text-center font-bold uppercase">
+                  Total Expense:
+                </p>
+                <p className="bg-red-500 p-1 rounded-sm text-center mt-2">
+                  {formatToUSD.format(totalExpense)}
+                </p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm text-center font-bold uppercase">
-                Total Expense:
-              </p>
-              <p className="bg-red-500 p-1 rounded-sm text-center mt-2">
-                {formatToUSD.format(totalExpense)}
-              </p>
-            </div>
+            <>
+              <Chart totalIncome={totalIncome} totalExpense={totalExpense} />
+            </>
           </div>
-          <>
-            <Chart totalIncome={totalIncome} totalExpense={totalExpense} />
-          </>
-        </div>
+        ) : (
+          <h1 className="bg-slate-800 p-4 flex justify-center">
+            No transactions
+          </h1>
+        )}
       </div>
-      <h1 className="my-5">
-        <TransactionTable limit={5} />
-      </h1>
+      {totalIncome || totalExpense ? (
+        <h1 className="my-5">
+          <TransactionTable limit={5} />
+        </h1>
+      ) : (
+        <h1 className="bg-slate-800 p-4 mt-3 flex justify-center">
+          No transactions
+        </h1>
+      )}
     </>
   );
 };
